@@ -56,6 +56,10 @@ body {
   font-size: 1rem;
 }
 
+.search-form input:focus {
+  outline: 2px solid #38bdf8;
+}
+
 .search-form button {
   background-color: #ffffff;
   color: hsl(220, 60%, 25%);
@@ -89,37 +93,151 @@ body {
   color: #1a1a1a;
 }
 
-/* Testo per liste vuote */
+/* Testo per liste vuote (si espande su tutte le colonne della griglia) */
 .testo-vuoto {
+  grid-column: 1 / -1;
   color: #888;
   font-style: italic;
   padding: 10px 0;
   margin: 0;
 }
 
-/* Liste squadre */
+/* === LAYOUT RESPONSIVE: GRIGLIA SQUADRE AI TRE BREAKPOINT === */
+/* Breakpoint Mobile (< 768px): 1 colonna */
 .lista-squadre {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
-.lista-squadre li {
+/* Breakpoint Tablet (>= 768px): 2 colonne */
+@media (min-width: 768px) {
+  .lista-squadre {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Breakpoint Desktop (>= 992px): 3 colonne */
+@media (min-width: 992px) {
+  .lista-squadre {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Breakpoint Desktop largo (>= 1200px): 4 colonne */
+@media (min-width: 1200px) {
+  .lista-squadre {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Stile della Card Squadra */
+.lista-squadre li.squadra-card {
   background: white;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  padding: 14px 16px;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e9ecef;
 }
 
-.lista-squadre li:hover {
+.lista-squadre li.squadra-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Card attiva con dettagli aperti sotto */
+.lista-squadre li.squadra-card.attiva {
+  border-color: hsl(220, 60%, 25%);
+  box-shadow: 0 0 0 2px hsl(220, 60%, 25%), 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.squadra-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.squadra-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.squadra-testi {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.squadra-nome {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.squadra-league {
+  font-size: 0.85rem;
+  color: #6c757d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.squadra-azioni {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #f8f9fa;
+}
+
+.btn-aggiungi,
+.btn-rimuovi {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-aggiungi {
+  background-color: hsl(220, 60%, 25%);
+  color: white;
+}
+
+.btn-aggiungi:hover:not(:disabled) {
+  background-color: hsl(220, 60%, 35%);
+}
+
+.btn-aggiungi:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-rimuovi {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-rimuovi:hover {
+  background-color: #fca5a5;
+  color: #991b1b;
 }
 
 /* === SPINNER E ERRORI === */
@@ -135,20 +253,78 @@ body {
   border-radius: 6px;
 }
 
-/* === DETTAGLI === */
+/* === DETTAGLI SUBITO SOTTO LA CARD === */
 
-#dettagli-section {
-  margin-top: 30px;
+.dettagli-squadra {
+  grid-column: 1 / -1;
+  /* Occupa tutta la larghezza della griglia */
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 6px 0 16px 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03), 0 4px 10px rgba(0, 0, 0, 0.04);
+  cursor: default;
+  animation: fadeIn 0.25s ease-in-out;
 }
 
-.dettagli-header h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dettagli-squadra .dettagli-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.dettagli-squadra .dettagli-header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dettagli-squadra .btn-chiudi-dettagli {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dettagli-squadra .btn-chiudi-dettagli:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.dettagli-squadra h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1e293b;
 }
 
 .lista-eventi {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .lista-eventi li {
