@@ -7,7 +7,6 @@
   <title>SportsHub — Eventi sportivi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX" crossorigin="anonymous">
-
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
@@ -15,19 +14,65 @@
 
   <header class="site-header">
     <!-- Titolo dell'app + form di ricerca -->
+    <h1>SportsHub</h1>
+    <p class="subtitle">Cerca una squadra, scopri prossime partite e ultimi risultati.</p>
+    
+    <form id="search-form" class="search-form">
+      <input type="text" id="search-input" placeholder="Cerca una squadra..." required>
+      <button type="submit">Cerca</button>
+    </form>
   </header>
 
   <main class="container">
 
     <section id="risultati-section">
-      <!-- Spinner, errore, lista risultati ricerca squadre -->
+      <!-- Spinner di caricamento (nascosto di default) -->
+      <div id="spinner" class="spinner-container d-none">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Caricamento...</span>
+        </div>
+      </div>
+
+      <!-- Messaggio di errore (nascosto) -->
+      <div id="errore" class="alert alert-danger" hidden></div>
+
+      <!-- Squadre trovate -->
+      <div class="sezione-header">
+        <h2>⭐ Le tue squadre preferite</h2>
+      </div>
+      <ul id="preferiti-lista" class="lista-squadre">
+        <p class="testo-vuoto">Non hai ancora salvato nessuna squadra. Cercane una qui sopra e aggiungila ai preferiti.</p>
+      </ul>
+
+      <div class="sezione-header mt-4">
+        <h2>Squadre trovate</h2>
+      </div>
+      <ul id="risultati-lista" class="lista-squadre">
+        <p class="testo-vuoto">Nessuna squadra trovata.</p>
+      </ul>
     </section>
 
     <section id="dettagli-section" hidden>
       <!-- Visibile dopo click su una squadra: prossimi eventi + ultimi risultati -->
+      <div class="dettagli-header">
+        <button id="btn-indietro" class="btn btn-outline-secondary btn-sm mb-3">← Torna indietro</button>
+        <h2 id="nome-squadra"></h2>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h3>Prossimi eventi</h3>
+          <ul id="eventi-prossimi" class="lista-eventi"></ul>
+        </div>
+        <div class="col-md-6">
+          <h3>Ultimi risultati</h3>
+          <ul id="eventi-passati" class="lista-eventi"></ul>
+        </div>
+      </div>
     </section>
 
   </main>
+  
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>

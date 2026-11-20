@@ -1,6 +1,4 @@
-/* SportsHub — Week Project Settimana VII
-   Reset minimale + tipografia di base. Aggiungi qui le tue regole. */
-
+/* SportsHub — Week Project Settimana VII */
 
 * {
   box-sizing: border-box;
@@ -21,12 +19,144 @@ body {
   padding: 20px;
 }
 
+/* === HEADER === */
+
 .site-header {
   background-color: hsl(220, 60%, 25%);
   color: white;
-  padding: 30px 20px;
+  padding: 40px 20px;
   text-align: center;
 }
 
+.site-header h1 {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
 
-/* Aggiungi qui le tue regole per: form, risultati, card squadra, eventi. */
+.site-header .subtitle {
+  margin: 0 0 24px;
+  opacity: 0.9;
+}
+
+/* Form di ricerca */
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-form button {
+  background-color: #ffffff;
+  color: hsl(220, 60%, 25%);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-form button:hover {
+  background-color: #e0e0e0;
+}
+
+/* === SEZIONI === */
+
+#risultati-section {
+  margin-top: 30px;
+}
+
+.sezione-header {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.sezione-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1a1a1a;
+}
+
+/* Testo per liste vuote */
+.testo-vuoto {
+  color: #888;
+  font-style: italic;
+  padding: 10px 0;
+  margin: 0;
+}
+
+/* Liste squadre */
+.lista-squadre {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-squadre li {
+  background: white;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lista-squadre li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === SPINNER E ERRORI === */
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.alert.alert-danger {
+  margin-top: 20px;
+  border-radius: 6px;
+}
+
+/* === DETTAGLI === */
+
+#dettagli-section {
+  margin-top: 30px;
+}
+
+.dettagli-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.lista-eventi {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-eventi li {
+  background: white;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border-left: 4px solid hsl(220, 60%, 25%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+}
