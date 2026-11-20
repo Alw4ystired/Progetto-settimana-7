@@ -1,8 +1,5 @@
-/* SportsHub — Week Project Settimana VII */
-
-* {
-  box-sizing: border-box;
-}
+/* === BASE === */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -19,320 +16,86 @@ body {
   padding: 20px;
 }
 
-/* === HEADER === */
-
 .site-header {
   background-color: hsl(220, 60%, 25%);
   color: white;
-  padding: 40px 20px;
+  padding: 30px 20px;
   text-align: center;
 }
 
-.site-header h1 {
-  margin: 0 0 8px;
-  font-size: 2.2rem;
-  font-weight: 700;
+.bg-brand {
+  background-color: #1a3366;
 }
 
-.site-header .subtitle {
-  margin: 0 0 24px;
-  opacity: 0.9;
+.text-brand {
+  color: #1a3366;
 }
 
-/* Form di ricerca */
-.search-form {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
+/* Bottone pieno: riusa le variabili interne di .btn */
+.btn-brand {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #1a3366;
+  --bs-btn-border-color: #1a3366;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #264d99;
+  --bs-btn-hover-border-color: #264d99;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #14284f;
+  --bs-btn-active-border-color: #14284f;
+  --bs-btn-focus-shadow-rgb: 26, 51, 102;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #1a3366;
+  --bs-btn-disabled-border-color: #1a3366;
 }
 
-.search-form input {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+/* Bottone con solo bordo (filtri sport) */
+.btn-outline-brand {
+  --bs-btn-color: #1a3366;
+  --bs-btn-border-color: #1a3366;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #1a3366;
+  --bs-btn-hover-border-color: #1a3366;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #1a3366;
+  --bs-btn-active-border-color: #1a3366;
+  --bs-btn-focus-shadow-rgb: 26, 51, 102;
+  --bs-btn-disabled-color: #1a3366;
+  --bs-btn-disabled-border-color: #1a3366;
 }
 
-.search-form input:focus {
+#search-input:focus {
   outline: 2px solid #38bdf8;
+  box-shadow: none;
 }
 
-.search-form button {
-  background-color: #ffffff;
-  color: hsl(220, 60%, 25%);
-  border: none;
-  padding: 10px 24px;
-  border-radius: 4px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.search-form button:hover {
-  background-color: #e0e0e0;
-}
-
-/* === SEZIONI === */
-
-#risultati-section {
-  margin-top: 30px;
-}
-
-.sezione-header {
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
-}
-
-.sezione-header h2 {
-  margin: 0;
-  font-size: 1.3rem;
-  color: #1a1a1a;
-}
-
-/* Testo per liste vuote (si espande su tutte le colonne della griglia) */
-.testo-vuoto {
-  grid-column: 1 / -1;
-  color: #888;
-  font-style: italic;
-  padding: 10px 0;
-  margin: 0;
-}
-
-/* === LAYOUT RESPONSIVE: GRIGLIA SQUADRE AI TRE BREAKPOINT === */
-/* Breakpoint Mobile (< 768px): 1 colonna */
-.lista-squadre {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-/* Breakpoint Tablet (>= 768px): 2 colonne */
-@media (min-width: 768px) {
-  .lista-squadre {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Breakpoint Desktop (>= 992px): 3 colonne */
-@media (min-width: 992px) {
-  .lista-squadre {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Breakpoint Desktop largo (>= 1200px): 4 colonne */
-@media (min-width: 1200px) {
-  .lista-squadre {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Stile della Card Squadra */
-.lista-squadre li.squadra-card {
-  background: white;
-  padding: 14px 16px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
+/* === Card squadra: effetto sollevamento all'hover === */
+.squadra-card > .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #e9ecef;
 }
 
-.lista-squadre li.squadra-card:hover {
+.squadra-card > .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Card attiva con dettagli aperti sotto */
-.lista-squadre li.squadra-card.attiva {
-  border-color: hsl(220, 60%, 25%);
-  box-shadow: 0 0 0 2px hsl(220, 60%, 25%), 0 4px 10px rgba(0, 0, 0, 0.1);
+/* === Eventi cliccabili: piccolo scatto a destra all'hover === */
+#modal-squadra .list-group-item-action,
+#appuntamenti-lista .list-group-item-action {
+  border-left: 4px solid #1a3366;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.squadra-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+#modal-squadra .list-group-item-action:hover,
+#appuntamenti-lista .list-group-item-action:hover {
+  transform: translateX(4px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-.squadra-logo {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-.squadra-testi {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.squadra-nome {
-  font-weight: 700;
-  font-size: 1rem;
-  color: #1a1a1a;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.squadra-league {
-  font-size: 0.85rem;
-  color: #6c757d;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.squadra-azioni {
-  margin-top: auto;
-  padding-top: 8px;
-  border-top: 1px solid #f8f9fa;
-}
-
-.btn-aggiungi,
-.btn-rimuovi {
-  width: 100%;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.2s ease;
-}
-
-.btn-aggiungi {
-  background-color: hsl(220, 60%, 25%);
-  color: white;
-}
-
-.btn-aggiungi:hover:not(:disabled) {
-  background-color: hsl(220, 60%, 35%);
-}
-
-.btn-aggiungi:disabled {
-  background-color: #e9ecef;
-  color: #6c757d;
-  cursor: not-allowed;
-}
-
-.btn-rimuovi {
-  background-color: #fee2e2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
-}
-
-.btn-rimuovi:hover {
-  background-color: #fca5a5;
-  color: #991b1b;
-}
-
-/* === SPINNER E ERRORI === */
-
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0;
-}
-
-.alert.alert-danger {
-  margin-top: 20px;
-  border-radius: 6px;
-}
-
-/* === DETTAGLI SUBITO SOTTO LA CARD === */
-
-.dettagli-squadra {
-  grid-column: 1 / -1;
-  /* Occupa tutta la larghezza della griglia */
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 6px 0 16px 0;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03), 0 4px 10px rgba(0, 0, 0, 0.04);
-  cursor: default;
-  animation: fadeIn 0.25s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
+/* Disattivazione animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .squadra-card > .card,
+  #modal-squadra .list-group-item-action,
+  #appuntamenti-lista .list-group-item-action {
+    transition: none;
   }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.dettagli-squadra .dettagli-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #cbd5e1;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-.dettagli-squadra .dettagli-header h3 {
-  margin: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.dettagli-squadra .btn-chiudi-dettagli {
-  background: white;
-  border: 1px solid #cbd5e1;
-  color: #64748b;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.dettagli-squadra .btn-chiudi-dettagli:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-  border-color: #94a3b8;
-}
-
-.dettagli-squadra h4 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #1e293b;
-}
-
-.lista-eventi {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.lista-eventi li {
-  background: white;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border-left: 4px solid hsl(220, 60%, 25%);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  font-size: 0.95rem;
 }
